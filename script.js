@@ -123,10 +123,4 @@ counter.innerText=target;
 update();
 
 });
-window.addEventListener('load', () => {
-  const loader = document.getElementById('pageLoader');
 
-  setTimeout(() => {
-    loader.classList.add('hide');
-  }, 900);
-});
