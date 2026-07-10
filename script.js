@@ -1,29 +1,97 @@
-const menuBtn=document.querySelector('.menu-btn'),nav=document.querySelector('.topbar nav');
-menuBtn.addEventListener('click',()=>nav.classList.toggle('open'));
-document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-document.getElementById('year').textContent=new Date().getFullYear();
+const menuBtn = document.querySelector('.menu-btn');
+const nav = document.getElementById('mainNav');
 
-const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dot')];
-let current=0;
-function showSlide(i){slides.forEach((s,n)=>s.classList.toggle('active',n===i));dots.forEach((d,n)=>d.classList.toggle('active',n===i));current=i}
-dots.forEach((d,i)=>d.addEventListener('click',()=>showSlide(i)));
-setInterval(()=>showSlide((current+1)%slides.length),5000);
-
-document.getElementById('bookingForm').addEventListener('submit',e=>{
- e.preventDefault();
- const v=id=>document.getElementById(id).value.trim();
- const text=`Hello Maruti Events,
-
-Name: ${v('name')}
-Mobile: ${v('mobile')}
-Event: ${v('eventType')}
-Event Date: ${v('eventDate')||'Not decided'}
-Location: ${v('location')||'Not provided'}
-Requirement: ${v('message')||'-'}`;
- window.open('https://wa.me/919723828206?text='+encodeURIComponent(text),'_blank');
+menuBtn.addEventListener('click', () => {
+  nav.classList.toggle('open');
 });
 
-const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg');
-document.querySelectorAll('.gallery img').forEach(img=>img.addEventListener('click',()=>{lightboxImg.src=img.src;lightbox.classList.add('open')}));
-document.getElementById('closeLightbox').addEventListener('click',()=>lightbox.classList.remove('open'));
-lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
+document.querySelectorAll('#mainNav a').forEach(link => {
+  link.addEventListener('click', () => nav.classList.remove('open'));
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const slides = [...document.querySelectorAll('.slide')];
+const dots = [...document.querySelectorAll('.dot')];
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+
+  currentSlide = index;
+}
+
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => showSlide(index));
+});
+
+setInterval(() => {
+  showSlide((currentSlide + 1) % slides.length);
+}, 5000);
+
+document.getElementById('bookingForm').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const value = id => document.getElementById(id).value.trim();
+
+  const mobile = value('mobile');
+
+  if (!/^\d{10}$/.test(mobile)) {
+    alert('Please enter a valid 10-digit mobile number.');
+    return;
+  }
+
+  const message =
+`Hello Maruti Events,
+
+Name: ${value('name')}
+Mobile: ${mobile}
+Event: ${value('eventType')}
+Event Date: ${value('eventDate') || 'Not decided'}
+Location: ${value('location') || 'Not provided'}
+Requirement: ${value('message') || '-'}`;
+
+  window.open(
+    'https://wa.me/919723828206?text=' + encodeURIComponent(message),
+    '_blank'
+  );
+});
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+
+document.querySelectorAll('.gallery img').forEach(image => {
+  image.addEventListener('click', () => {
+    lightboxImg.src = image.src;
+    lightbox.classList.add('open');
+  });
+});
+
+document.getElementById('closeLightbox').addEventListener('click', () => {
+  lightbox.classList.remove('open');
+});
+
+lightbox.addEventListener('click', event => {
+  if (event.target === lightbox) {
+    lightbox.classList.remove('open');
+  }
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(element => {
+  observer.observe(element);
+});
