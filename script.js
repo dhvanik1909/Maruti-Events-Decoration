@@ -123,4 +123,14 @@ counter.innerText=target;
 update();
 
 });
+const waToggle = document.getElementById('waToggle');
+const waChat = document.getElementById('waChat');
+const waClose = document.getElementById('waClose');
 
+waToggle.addEventListener('click', () => {
+  waChat.classList.toggle('open');
+});
+
+waClose.addEventListener('click', () => {
+  waChat.classList.remove('open');
+});
