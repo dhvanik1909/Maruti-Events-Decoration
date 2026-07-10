@@ -125,10 +125,3 @@ update();
 });
 
 
-waToggle.addEventListener('click', () => {
-  waChat.classList.toggle('open');
-});
-
-waClose.addEventListener('click', () => {
-  waChat.classList.remove('open');
-});
