@@ -796,3 +796,110 @@ grid-template-columns:1fr;
     bottom:82px;
   }
 }
+.floating-whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border:0;
+  background:#25D366;
+  color:#fff;
+  font-size:27px;
+  cursor:pointer;
+  z-index:99999;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+
+.wa-chat{
+  position:fixed;
+  right:20px;
+  bottom:92px;
+  width:330px;
+  padding:20px;
+  background:#111;
+  border:1px solid rgba(212,175,55,.35);
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.55);
+  z-index:99998;
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(15px) scale(.96);
+  transition:.3s;
+}
+
+.wa-chat.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:none;
+}
+
+.wa-close{
+  position:absolute;
+  right:12px;
+  top:8px;
+  border:0;
+  background:none;
+  color:#aaa;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.wa-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding-right:25px;
+}
+
+.wa-header img{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid #d4af37;
+}
+
+.wa-header strong{
+  display:block;
+  color:#f0d36f;
+}
+
+.wa-header span{
+  display:block;
+  color:#888;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.wa-message{
+  margin:18px 0;
+  padding:14px;
+  border-radius:12px;
+  background:#1b1b1b;
+  color:#ddd;
+  line-height:1.6;
+}
+
+.wa-start{
+  display:block;
+  text-align:center;
+  padding:13px;
+  border-radius:9px;
+  background:#25D366;
+  color:#fff;
+  font-weight:800;
+}
+
+@media(max-width:600px){
+  .wa-chat{
+    right:14px;
+    left:14px;
+    width:auto;
+    bottom:82px;
+  }
+}
