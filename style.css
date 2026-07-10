@@ -242,7 +242,14 @@ button,input,select,textarea{font:inherit}
 .floating-whatsapp{bottom:20px;background:#25D366}
 .floating-call{bottom:95px;background:var(--gold);color:#000}
 
-footer{text-align:center;padding:40px;color:#777;border-top:1px solid #222}
+footer{
+text-align:center;
+padding:35px;
+color:#777;
+border-top:1px solid #222;
+background:#111;
+margin-top:0;
+}
 footer img{width:62px;height:62px;border-radius:50%;margin:0 auto 10px}
 
 .lightbox{
